@@ -1,31 +1,52 @@
-using UnityEngine;
+using System.Collections;
 using TMPro;
-using System.IO;
+using UnityEngine;
+using UnityEngine.Networking;
+using static System.Net.Mime.MediaTypeNames;
 
 public class JsonTextLoader : MonoBehaviour
 {
     public TextMeshProUGUI textField;
     public string fileName = "VehicleInfo.json";
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        LoadText();
+        StartCoroutine(LoadText());
     }
 
-    void LoadText()
+    IEnumerator LoadText()
     {
-        string path = Path.Combine(Application.streamingAssetsPath, fileName);
+        string path = System.IO.Path.Combine(UnityEngine.Application.streamingAssetsPath, fileName);
 
-        if (File.Exists(path))
+#if UNITY_ANDROID && !UNITY_EDITOR
+        UnityWebRequest request = UnityWebRequest.Get(path);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
         {
-            string json = File.ReadAllText(path);
-            TextData data = JsonUtility.FromJson<TextData>(json);
-
-            textField.text = $"<b>{data.title}</b>\n\n{data.message}";
+            ProcessJson(request.downloadHandler.text);
+        }
+        else
+        {
+            textField.text = "File not found (Android).";
+        }
+#else
+        if (System.IO.File.Exists(path))
+        {
+            string json = System.IO.File.ReadAllText(path);
+            ProcessJson(json);
         }
         else
         {
             textField.text = "File not found.";
         }
+#endif
+        yield break;
+    }
+
+    void ProcessJson(string json)
+    {
+        TextData data = JsonUtility.FromJson<TextData>(json);
+        textField.text = $"<b>{data.title}</b>\n\n{data.message}";
     }
 }
