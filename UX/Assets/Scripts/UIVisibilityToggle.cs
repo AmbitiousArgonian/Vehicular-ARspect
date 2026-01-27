@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class UIVisibilityToggle : MonoBehaviour
 {
-    public GameObject panelObject;      // Panel
+    public GameObject panelObject;      
+    public OVROverlay overlay;          // Panel
     public JsonTextLoader loader;       // JSON Script   
     private bool isVisible = true;
 
@@ -13,11 +14,14 @@ public class UIVisibilityToggle : MonoBehaviour
         {
             isVisible = !isVisible;
             panelObject.SetActive(isVisible);
+            if (overlay != null)
+                overlay.enabled = isVisible;
         }
         // Set here trigger for visibility of panel rn A-Button
         if (OVRInput.GetDown(OVRInput.Button.One))
         {
-            loader.NextVehicle();
+            if (loader != null)
+                loader.NextVehicle();
         }
     }
 }

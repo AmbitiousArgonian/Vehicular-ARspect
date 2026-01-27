@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -55,6 +56,8 @@ public class JsonTextLoader : MonoBehaviour
     void ProcessJson(string json)
     {
         vehicleList = JsonUtility.FromJson<VehicleList>(json);
+        Debug.Log("Vehicle count: " + vehicleList?.vehicles?.Length); 
+
 
         if (vehicleList == null || vehicleList.vehicles.Length == 0)
         {
