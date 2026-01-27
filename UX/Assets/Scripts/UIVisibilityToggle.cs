@@ -15,7 +15,9 @@ public class UIVisibilityToggle : MonoBehaviour
             isVisible = !isVisible;
             panelObject.SetActive(isVisible);
             if (overlay != null)
-                overlay.enabled = isVisible;
+                overlay.currentOverlayType = isVisible
+            ? OVROverlay.OverlayType.Overlay
+            : OVROverlay.OverlayType.None;
         }
         // Set here trigger for visibility of panel rn A-Button
         if (OVRInput.GetDown(OVRInput.Button.One))

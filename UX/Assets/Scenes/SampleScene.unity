@@ -1257,6 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIVisibilityToggle
   panelObject: {fileID: 1422424909}
+  overlay: {fileID: 0}
   loader: {fileID: 1681280977}
 --- !u!1 &1726269234
 GameObject:

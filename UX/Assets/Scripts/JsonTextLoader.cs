@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -16,39 +15,38 @@ public class JsonTextLoader : MonoBehaviour
 
     IEnumerator LoadText()
     {
-        string path = System.IO.Path.Combine(UnityEngine.Application.streamingAssetsPath, fileName);
-        Debug.Log("PATH: " + path);
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName);
 
 #if UNITY_ANDROID && !UNITY_EDITOR
-        UnityWebRequest request = UnityWebRequest.Get(path);
-        yield return request.SendWebRequest();
+    UnityWebRequest request = UnityWebRequest.Get(filePath);
+    yield return request.SendWebRequest();
 
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            Debug.Log("JSON LOADED");
-            ProcessJson(request.downloadHandler.text);
-        }
-        else
-        {
-            Debug.Log("ERROR: " + request.error);
-            textField.text = "File not found (Android).";
-        }
+    if (request.result != UnityWebRequest.Result.Success)
+    {
+        Debug.LogError("LOAD ERROR: " + request.error);
+        textField.text = "Load error:\n" + request.error;
+    }
+    else
+    {
+        Debug.Log("JSON RAW:\n" + request.downloadHandler.text);
+        textField.text = request.downloadHandler.text;
+
+    }
 #else
-        if (System.IO.File.Exists(path))
+        if (System.IO.File.Exists(filePath))
         {
-            string json = System.IO.File.ReadAllText(path);
-            Debug.Log("JSON LOADED");
+            string json = System.IO.File.ReadAllText(filePath);
+            Debug.Log("JSON RAW:\n" + json);
             ProcessJson(json);
         }
         else
         {
-            Debug.Log("FILE NOT FOUND");
             textField.text = "File not found.";
         }
 #endif
-
         yield break;
     }
+
 
     private VehicleList vehicleList;
     private int currentVehicleIndex = 0;
