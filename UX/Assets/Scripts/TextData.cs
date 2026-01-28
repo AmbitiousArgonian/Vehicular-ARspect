@@ -1,6 +1,13 @@
 [System.Serializable]
-public class TextData
+public class VehicleData
 {
-    public string title;
-    public string message;
+    public string FIN;
+    public string ABEs;
+    public string defReport;
+}
+
+[System.Serializable]
+public class VehicleList
+{
+    public VehicleData[] vehicles;
 }

@@ -49,16 +49,38 @@ public class JsonTextLoader : MonoBehaviour
         yield break;
     }
 
+    private VehicleList vehicleList;
+    private int currentVehicleIndex = 0;
+
     void ProcessJson(string json)
     {
-        TextData data = JsonUtility.FromJson<TextData>(json);
+        vehicleList = JsonUtility.FromJson<VehicleList>(json);
 
-        if (data == null)
+        if (vehicleList == null || vehicleList.vehicles.Length == 0)
         {
-            textField.text = "JSON Parse Error";
+            textField.text = "No vehicle data.";
             return;
         }
 
-        textField.text = $"<b>{data.title}</b>\n\n{data.message}";
+        ShowVehicle(0);
     }
+
+    public void ShowVehicle(int index)
+    {
+        currentVehicleIndex = Mathf.Clamp(index, 0, vehicleList.vehicles.Length - 1);
+        VehicleData v = vehicleList.vehicles[currentVehicleIndex];
+
+        textField.text =
+            $"<b>Fahrzeug {currentVehicleIndex + 1}</b>\n\n" +
+            $"FIN: {v.FIN}\n" +
+            $"ABEs: {v.ABEs}\n" +
+            $"Defects: {v.defReport}";
+    }
+
+    public void NextVehicle()
+    {
+        int next = (currentVehicleIndex + 1) % vehicleList.vehicles.Length;
+        ShowVehicle(next);
+    }
+
 }

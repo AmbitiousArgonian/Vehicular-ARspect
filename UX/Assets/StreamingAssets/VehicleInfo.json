@@ -1,4 +1,14 @@
-{
-  "title": "Testtitel",
-  "message": "Hier würden Fahrzeugdaten stehen"
+{ 
+  "vehicles": [
+    {
+      "FIN": "W VW ZZZ1J 7 X W 000001",
+      "ABEs": "None",
+      "defReport": "left break"
+    },
+    {
+      "FIN": "1 FD WF82C 8 X V 351209",
+      "ABEs": "felly, exhaust",
+      "defReport": "None"
+    }
+  ]
 }
