@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UIVisibilityToggle : MonoBehaviour
 {
+    public UIFader fader;
     public GameObject panelObject;
     public JsonTextLoader loader;  
     private bool isVisible = true;
@@ -12,7 +13,10 @@ public class UIVisibilityToggle : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             isVisible = !isVisible;
-            panelObject.SetActive(isVisible);
+            if (isVisible)
+                fader.FadeIn();
+            else
+                fader.FadeOut();
         }
         // Next Vehicle
         if (OVRInput.GetDown(OVRInput.Button.One))
