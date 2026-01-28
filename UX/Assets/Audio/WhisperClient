@@ -1,0 +1,43 @@
+using UnityEngine;
+using UnityEngine.Networking;
+using System.Collections;
+
+public class WhisperClient : MonoBehaviour
+{
+    [Header("Server Settings")]
+    public string serverUrl = "http://localhost:8080/inference";
+
+    [Header("References")]
+    public TextToDocu textToDocu; // Referenz setzen!
+
+    public IEnumerator Transcribe(byte[] wavData)
+    {
+        WWWForm form = new WWWForm();
+        form.AddBinaryData("file", wavData, "audio.wav", "audio/wav");
+
+        using (UnityWebRequest request = UnityWebRequest.Post(serverUrl, form))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string whisperText = request.downloadHandler.text;
+                Debug.Log("Whisper result: " + whisperText);
+
+                // Text speichern
+                if (textToDocu != null)
+                {
+                    textToDocu.SaveText(whisperText);
+                }
+                else
+                {
+                    Debug.LogError("TextToDocu Referenz fehlt!");
+                }
+            }
+            else
+            {
+                Debug.LogError("Whisper error: " + request.error);
+            }
+        }
+    }
+}
