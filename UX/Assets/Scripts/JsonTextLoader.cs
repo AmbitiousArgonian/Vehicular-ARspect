@@ -7,6 +7,8 @@ public class JsonTextLoader : MonoBehaviour
 {
     public TextMeshProUGUI textField;
     public string fileName = "VehicleInfo.json";
+    public CanvasGroup textGroup;
+    public float textFadeTime = 0.15f;
 
     void Start()
     {
@@ -81,6 +83,27 @@ public class JsonTextLoader : MonoBehaviour
     {
         int next = (currentVehicleIndex + 1) % vehicleList.vehicles.Length;
         ShowVehicle(next);
+    }
+
+    IEnumerator SwitchVehicle()
+    {
+        yield return FadeText(0);
+        int next = (currentVehicleIndex + 1) % vehicleList.vehicles.Length;
+        ShowVehicle(next);
+        yield return FadeText(1);
+    }
+
+    IEnumerator FadeText(float target)
+    {
+        float start = textGroup.alpha;
+        float time = 0f;
+
+        while (time < textFadeTime)
+        {
+            time += Time.deltaTime;
+            textGroup.alpha = Mathf.Lerp(start, target, time / textFadeTime);
+            yield return null;
+        }
     }
 
 }
