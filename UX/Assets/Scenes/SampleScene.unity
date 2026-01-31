@@ -750,9 +750,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273f88d99f5213a47ab4a14351a7fcce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIVisibilityToggle
-  fader: {fileID: 185199077}
-  panelObject: {fileID: 185199075}
-  loader: {fileID: 931597574}
+  rightFader: {fileID: 1422424913}
+  rightLoader: {fileID: 1681280977}
+  leftFader: {fileID: 185199077}
+  leftLoader: {fileID: 931597574}
 --- !u!114 &931597574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1690,9 +1691,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273f88d99f5213a47ab4a14351a7fcce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIVisibilityToggle
-  fader: {fileID: 1422424913}
-  panelObject: {fileID: 1422424909}
-  loader: {fileID: 1681280977}
+  rightFader: {fileID: 1422424913}
+  rightLoader: {fileID: 1681280977}
+  leftFader: {fileID: 185199077}
+  leftLoader: {fileID: 931597574}
 --- !u!1 &1726269234
 GameObject:
   m_ObjectHideFlags: 0
