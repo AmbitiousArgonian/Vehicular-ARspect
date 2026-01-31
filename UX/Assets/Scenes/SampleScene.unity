@@ -754,7 +754,7 @@ MonoBehaviour:
   rightFader: {fileID: 1422424913}
   rightLoader: {fileID: 1681280977}
   leftFader: {fileID: 185199077}
-  leftLoader: {fileID: 931597574}
+  leftLoader: {fileID: 931597579}
 --- !u!114 &931597574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1709,7 +1709,7 @@ MonoBehaviour:
   rightFader: {fileID: 1422424913}
   rightLoader: {fileID: 1681280977}
   leftFader: {fileID: 185199077}
-  leftLoader: {fileID: 931597574}
+  leftLoader: {fileID: 931597579}
 --- !u!1 &1726269234
 GameObject:
   m_ObjectHideFlags: 0
