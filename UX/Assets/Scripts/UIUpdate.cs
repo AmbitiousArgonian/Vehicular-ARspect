@@ -1,27 +1,44 @@
 using UnityEngine;
 
-public class UIVisibilityToggle : MonoBehaviour
+public class UIController : MonoBehaviour
 {
-    public UIFader fader;
-    public GameObject panelObject;
-    public JsonTextLoader loader;  
-    private bool isVisible = true;
+    [Header("Right Panel")]
+    public UIFader rightFader;
+    public JsonTextLoader rightLoader;
+
+    [Header("Left Panel")]
+    public UIFader leftFader;
+    public JsonTextLoader leftLoader;
+
+    private bool rightVisible = true;
+    private bool leftVisible = true;
 
     void Update()
     {
-        //  Visibility
-        if (OVRInput.GetDown(OVRInput.Button.Two))
+        // Right Panel Vehicles
+        if (OVRInput.GetDown(OVRInput.Button.Two)) // B
         {
-            isVisible = !isVisible;
-            if (isVisible)
-                fader.FadeIn();
-            else
-                fader.FadeOut();
+            rightVisible = !rightVisible;
+            if (rightVisible) rightFader.FadeIn();
+            else rightFader.FadeOut();
         }
-        // Next Vehicle
-        if (OVRInput.GetDown(OVRInput.Button.One))
+
+        if (OVRInput.GetDown(OVRInput.Button.One)) // A
         {
-            loader.NextVehicle();
+            rightLoader.NextVehicle();
+        }
+
+        // Left Panel Workflow
+        if (OVRInput.GetDown(OVRInput.Button.Four)) // Y
+        {
+            leftVisible = !leftVisible;
+            if (leftVisible) leftFader.FadeIn();
+            else leftFader.FadeOut();
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.Three)) // X
+        {
+            leftLoader.NextVehicle();
         }
     }
 }
