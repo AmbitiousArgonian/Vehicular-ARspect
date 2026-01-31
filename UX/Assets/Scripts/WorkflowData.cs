@@ -8,7 +8,7 @@ public class WorkflowData
 }
 
 [System.Serializable]
-public class VehicleList
+public class WorkflowList
 {
-    public VehicleData[] WorkflowItem;
+    public WorkflowData[] WorkflowItem;
 }
