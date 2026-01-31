@@ -709,10 +709,8 @@ GameObject:
   - component: {fileID: 931597577}
   - component: {fileID: 931597576}
   - component: {fileID: 931597575}
-  - component: {fileID: 931597574}
   - component: {fileID: 931597573}
   - component: {fileID: 931597579}
-  - component: {fileID: 931597580}
   m_Layer: 3
   m_Name: Canvas_Left
   m_TagString: Untagged
@@ -756,22 +754,6 @@ MonoBehaviour:
   rightLoader: {fileID: 1681280977}
   leftFader: {fileID: 185199077}
   leftLoader: {fileID: 931597579}
---- !u!114 &931597574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931597571}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f0f46d4bae2e7947a20f162e3abc31d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JsonTextLoader
-  textField: {fileID: 1325758628}
-  fileName: VehicleInfo.json
-  textGroup: {fileID: 0}
-  textFadeTime: 0.15
 --- !u!114 &931597575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,20 +846,6 @@ Canvas:
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &931597579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931597571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f025555699ec884da463eacb2a3a196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorkflowTextLoader
-  textField: {fileID: 1325758628}
-  fileName: WorkflowInfo.json
---- !u!114 &931597580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
