@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class JsonTextLoader : MonoBehaviour
+public class VehicleTextLoader : MonoBehaviour
 {
     public TextMeshProUGUI textField;
     public string fileName = "VehicleInfo.json";

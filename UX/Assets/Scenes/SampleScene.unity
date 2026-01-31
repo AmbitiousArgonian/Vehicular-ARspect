@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JsonTextLoader
   textField: {fileID: 210541959}
   fileName: VehicleInfo.json
-  textGroup: {fileID: 0}
+  textGroup: {fileID: 1422424914}
   textFadeTime: 0.15
 --- !u!114 &1681280978
 MonoBehaviour:

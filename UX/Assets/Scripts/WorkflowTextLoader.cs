@@ -62,7 +62,7 @@ public class WorkflowTextLoader : MonoBehaviour
             $"• {w.point3}";
     }
 
-    public void NextStep()
+    public void NextWorkflow()
     {
         int next = (currentIndex + 1) % workflowList.workflow.Length;
         ShowStep(next);

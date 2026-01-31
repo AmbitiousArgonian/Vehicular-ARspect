@@ -5,11 +5,11 @@ public class UIController : MonoBehaviour
 {
     [Header("Right Panel")]
     public UIFader rightFader;
-    public JsonTextLoader rightLoader;
+    public VehicleTextLoader rightLoader;
 
     [Header("Left Panel")]
     public UIFader leftFader;
-    public JsonTextLoader leftLoader;
+    public WorkflowTextLoader leftLoader;
 
     enum UIMode { None, Vehicle, Workflow }
     UIMode currentMode = UIMode.Vehicle;
@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour
 
         if (OVRInput.GetDown(OVRInput.Button.Three)) // X
         {
-            leftLoader.NextVehicle();
+            leftLoader.NextWorkflow();
         }
     }
     void ToggleVehiclePanel()
