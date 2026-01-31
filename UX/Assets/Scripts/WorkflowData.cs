@@ -1,14 +1,14 @@
 [System.Serializable]
 public class WorkflowData
 {
-    public string Titel;
-    public string Point1;
-    public string Point2;
-    public string Point3;
+    public string title;
+    public string point1;
+    public string point2;
+    public string point3;
 }
 
 [System.Serializable]
 public class WorkflowList
 {
-    public WorkflowData[] WorkflowItem;
+    public WorkflowData[] workflow;
 }
