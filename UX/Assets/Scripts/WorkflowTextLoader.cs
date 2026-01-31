@@ -56,6 +56,7 @@ public class WorkflowTextLoader : MonoBehaviour
         WorkflowData w = workflowList.workflow[currentIndex];
 
         textField.text =
+            $"<b>Workflowstep {currentIndex + 1}</b>\n\n" +
             $"<b>{w.title}</b>\n\n" +
             $"• {w.point1}\n" +
             $"• {w.point2}\n" +
