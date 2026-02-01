@@ -27,10 +27,10 @@ public class UIController : MonoBehaviour
             ToggleVehiclePanel();
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.One)) // A
-        {
-            rightLoader.NextVehicle();
-        }
+        //if (OVRInput.GetDown(OVRInput.Button.One)) // A
+        //{
+        //    rightLoader.NextVehicle();
+        //}
 
         // Left Panel Workflow
         if (OVRInput.GetDown(OVRInput.Button.Four)) // Y
@@ -38,10 +38,10 @@ public class UIController : MonoBehaviour
              ToggleWorkflowPanel();;
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.Three)) // X
-        {
-            leftLoader.NextWorkflow();
-        }
+        //if (OVRInput.GetDown(OVRInput.Button.Three)) // X
+        //{
+        //    leftLoader.NextWorkflow();
+        //}
     }
     void ToggleVehiclePanel()
     {

@@ -9,6 +9,16 @@
       "FIN": "1 FD WF82C 8 X V 351209",
       "ABEs": "felly, exhaust",
       "defReport": "None"
+    },
+	{
+      "FIN": "Beispiel3",
+      "ABEs": "Beispiel3",
+      "defReport": "Beispiel3"
+    },
+{
+      "FIN": "Beispiel4",
+      "ABEs": "Beispiel4",
+      "defReport": "Beispiel4"
     }
   ]
 }

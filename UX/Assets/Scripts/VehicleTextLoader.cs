@@ -10,6 +10,10 @@ public class VehicleTextLoader : MonoBehaviour
     public CanvasGroup textGroup;
     public float textFadeTime = 0.15f;
 
+
+    private VehicleList vehicleList;
+    private int currentVehicleIndex = 0;
+
     void Start()
     {
         StartCoroutine(LoadText());
@@ -51,8 +55,6 @@ public class VehicleTextLoader : MonoBehaviour
         yield break;
     }
 
-    private VehicleList vehicleList;
-    private int currentVehicleIndex = 0;
 
     void ProcessJson(string json)
     {
@@ -69,20 +71,23 @@ public class VehicleTextLoader : MonoBehaviour
 
     public void ShowVehicle(int index)
     {
-        currentVehicleIndex = Mathf.Clamp(index, 0, vehicleList.vehicles.Length - 1);
+        currentVehicleIndex = index % vehicleList.vehicles.Length;
         VehicleData v = vehicleList.vehicles[currentVehicleIndex];
-
+        int printIndex = currentVehicleIndex;
+            printIndex = printIndex + 1;
         textField.text =
-            $"<b>Fahrzeug {currentVehicleIndex + 1}</b>\n\n" +
+            $"<b>Fahrzeug {printIndex} / {vehicleList.vehicles.Length}</b>\n\n" +
             $"FIN: {v.FIN}\n" +
             $"ABEs: {v.ABEs}\n" +
             $"Defects: {v.defReport}";
     }
 
-    public void NextVehicle()
+     void Update()
     {
-        int next = (currentVehicleIndex + 1) % vehicleList.vehicles.Length;
-        ShowVehicle(next);
+        if (OVRInput.GetDown(OVRInput.Button.One)) // A
+        {
+            ShowVehicle(currentVehicleIndex + 1);
+        }
     }
 
     IEnumerator SwitchVehicle()

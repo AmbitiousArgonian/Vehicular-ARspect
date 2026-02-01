@@ -52,20 +52,24 @@ public class WorkflowTextLoader : MonoBehaviour
 
     public void ShowStep(int index)
     {
-        currentIndex = Mathf.Clamp(index, 0, workflowList.workflow.Length - 1);
+        currentIndex = index % workflowList.workflow.Length;
         WorkflowData w = workflowList.workflow[currentIndex];
+        int printIndex = currentIndex;
+        printIndex = printIndex + 1;
 
         textField.text =
-            $"<b>Workflowstep {currentIndex + 1}</b>\n\n" +
+            $"<b>Workflowstep {printIndex} / {workflowList.workflow.Length }</b>\n\n" +
             $"<b>{w.title}</b>\n\n" +
             $"• {w.point1}\n" +
             $"• {w.point2}\n" +
             $"• {w.point3}";
     }
 
-    public void NextWorkflow()
+     void Update()
     {
-        int next = (currentIndex + 1) % workflowList.workflow.Length;
-        ShowStep(next);
+        if (OVRInput.GetDown(OVRInput.Button.Three)) // X
+        {
+            ShowStep(currentIndex + 1);
+        }
     }
 }
