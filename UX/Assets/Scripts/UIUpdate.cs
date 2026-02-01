@@ -1,27 +1,82 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
-public class UIVisibilityToggle : MonoBehaviour
+public class UIController : MonoBehaviour
 {
-    public UIFader fader;
-    public GameObject panelObject;
-    public JsonTextLoader loader;  
-    private bool isVisible = true;
+    [Header("Right Panel")]
+    public UIFader rightFader;
+    public VehicleTextLoader rightLoader;
+
+    [Header("Left Panel")]
+    public UIFader leftFader;
+    public WorkflowTextLoader leftLoader;
+
+    enum UIMode { None, Vehicle, Workflow }
+    UIMode currentMode = UIMode.Vehicle;
+
+    void Start()
+    {
+        ShowVehicle();
+    }
 
     void Update()
     {
-        //  Visibility
-        if (OVRInput.GetDown(OVRInput.Button.Two))
+        // Right Panel Vehicles
+        if (OVRInput.GetDown(OVRInput.Button.Two)) // B
         {
-            isVisible = !isVisible;
-            if (isVisible)
-                fader.FadeIn();
-            else
-                fader.FadeOut();
+            ToggleVehiclePanel();
         }
-        // Next Vehicle
-        if (OVRInput.GetDown(OVRInput.Button.One))
+
+        //if (OVRInput.GetDown(OVRInput.Button.One)) // A
+        //{
+        //    rightLoader.NextVehicle();
+        //}
+
+        // Left Panel Workflow
+        if (OVRInput.GetDown(OVRInput.Button.Four)) // Y
         {
-            loader.NextVehicle();
+             ToggleWorkflowPanel();;
         }
+
+        //if (OVRInput.GetDown(OVRInput.Button.Three)) // X
+        //{
+        //    leftLoader.NextWorkflow();
+        //}
+    }
+    void ToggleVehiclePanel()
+    {
+        if (currentMode == UIMode.Vehicle)
+            HideAll();
+        else
+            ShowVehicle();
+    }
+
+    void ToggleWorkflowPanel()
+    {
+        if (currentMode == UIMode.Workflow)
+            HideAll();
+        else
+            ShowWorkflow();
+    }
+
+    void ShowVehicle()
+    {
+        currentMode = UIMode.Vehicle;
+        rightFader.FadeIn();
+        leftFader.FadeOut();
+    }
+
+    void ShowWorkflow()
+    {
+        currentMode = UIMode.Workflow;
+        leftFader.FadeIn();
+        rightFader.FadeOut();
+    }
+
+    void HideAll()
+    {
+        currentMode = UIMode.None;
+        rightFader.FadeOut();
+        leftFader.FadeOut();
     }
 }

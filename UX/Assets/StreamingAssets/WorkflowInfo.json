@@ -1,0 +1,28 @@
+{
+  "workflow": [
+    {
+      "title": "Identifikation",
+      "point1": "license plate",
+      "point2": "registration certificate I",
+      "point3": "Modifications?"
+    },
+    {
+      "title": "Visual Check",
+      "point1": "body structure",
+      "point2": "windows",
+      "point3": "license plate mounting"
+    },
+{
+      "title": "Beispiel3",
+      "point1": "Beispiel3",
+      "point2": "Beispiel3",
+      "point3": "Beispiel3"
+    },
+	{
+      "title": "Beispiel4",
+      "point1": "Beispiel4",
+      "point2": "Beispiel4",
+      "point3": "Beispiel4"
+    }
+  ]
+}

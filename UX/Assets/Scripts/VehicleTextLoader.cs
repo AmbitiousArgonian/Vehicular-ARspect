@@ -3,10 +3,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class JsonTextLoader : MonoBehaviour
+public class VehicleTextLoader : MonoBehaviour
 {
     public TextMeshProUGUI textField;
     public string fileName = "VehicleInfo.json";
+    public CanvasGroup textGroup;
+    public float textFadeTime = 0.15f;
+
+
+    private VehicleList vehicleList;
+    private int currentVehicleIndex = 0;
 
     void Start()
     {
@@ -49,8 +55,6 @@ public class JsonTextLoader : MonoBehaviour
         yield break;
     }
 
-    private VehicleList vehicleList;
-    private int currentVehicleIndex = 0;
 
     void ProcessJson(string json)
     {
@@ -67,20 +71,44 @@ public class JsonTextLoader : MonoBehaviour
 
     public void ShowVehicle(int index)
     {
-        currentVehicleIndex = Mathf.Clamp(index, 0, vehicleList.vehicles.Length - 1);
+        currentVehicleIndex = index % vehicleList.vehicles.Length;
         VehicleData v = vehicleList.vehicles[currentVehicleIndex];
-
+        int printIndex = currentVehicleIndex;
+            printIndex = printIndex + 1;
         textField.text =
-            $"<b>Fahrzeug {currentVehicleIndex + 1}</b>\n\n" +
+            $"<b>Fahrzeug {printIndex} / {vehicleList.vehicles.Length}</b>\n\n" +
             $"FIN: {v.FIN}\n" +
             $"ABEs: {v.ABEs}\n" +
             $"Defects: {v.defReport}";
     }
 
-    public void NextVehicle()
+     void Update()
     {
+        if (OVRInput.GetDown(OVRInput.Button.One)) // A
+        {
+            ShowVehicle(currentVehicleIndex + 1);
+        }
+    }
+
+    IEnumerator SwitchVehicle()
+    {
+        yield return FadeText(0);
         int next = (currentVehicleIndex + 1) % vehicleList.vehicles.Length;
         ShowVehicle(next);
+        yield return FadeText(1);
+    }
+
+    IEnumerator FadeText(float target)
+    {
+        float start = textGroup.alpha;
+        float time = 0f;
+
+        while (time < textFadeTime)
+        {
+            time += Time.deltaTime;
+            textGroup.alpha = Mathf.Lerp(start, target, time / textFadeTime);
+            yield return null;
+        }
     }
 
 }
