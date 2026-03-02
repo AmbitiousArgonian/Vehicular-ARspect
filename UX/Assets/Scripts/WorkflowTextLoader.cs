@@ -65,14 +65,6 @@ public class WorkflowTextLoader : MonoBehaviour
             $"• {w.point3}";
     }
 
-    // void Update()
-    //{
-    //    if (OVRInput.GetDown(OVRInput.Button.Three)) // X
-    //    {
-    //        ShowStep(currentIndex + 1);
-    //    }
-    //}
-
     public void NextWorkflow()
     { 
         ShowStep(currentIndex + 1);

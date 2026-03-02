@@ -82,13 +82,6 @@ public class VehicleTextLoader : MonoBehaviour
             $"Defects: {v.defReport}";
     }
 
-    // void Update()
-    //{
-    //    if (OVRInput.GetDown(OVRInput.Button.One)) // A
-    //    {
-    //        ShowVehicle(currentVehicleIndex + 1);
-    //    }
-    //}
 
     public void NextVehicle()
     {
