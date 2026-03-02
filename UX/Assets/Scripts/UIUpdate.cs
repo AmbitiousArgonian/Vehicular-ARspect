@@ -21,27 +21,27 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        // Right Panel Vehicles
+        // Right Panel Vehicles 
         if (OVRInput.GetDown(OVRInput.Button.Two)) // B
         {
             ToggleVehiclePanel();
         }
 
-        //if (OVRInput.GetDown(OVRInput.Button.One)) // A
-        //{
-        //    rightLoader.NextVehicle();
-        //}
+        if ((currentMode == UIMode.Vehicle) && (OVRInput.GetDown(OVRInput.Button.One))) // A und Vehicle Panel geöffnet
+        {
+            rightLoader.NextVehicle();
+        }
 
-        // Left Panel Workflow
+        // Left Panel Workflow 
         if (OVRInput.GetDown(OVRInput.Button.Four)) // Y
         {
              ToggleWorkflowPanel();;
         }
 
-        //if (OVRInput.GetDown(OVRInput.Button.Three)) // X
-        //{
-        //    leftLoader.NextWorkflow();
-        //}
+        if ((currentMode == UIMode.Workflow) && (OVRInput.GetDown(OVRInput.Button.Three))) // X und Workflow Panel geöffnet
+        {
+            leftLoader.NextWorkflow();
+        }
     }
     void ToggleVehiclePanel()
     {
