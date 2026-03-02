@@ -13,16 +13,65 @@
       "point3": "license plate mounting"
     },
 {
-      "title": "Beispiel3",
-      "point1": "Beispiel3",
-      "point2": "Beispiel3",
-      "point3": "Beispiel3"
+      "title": "Lighting equipment",
+      "point1": "fog lights",
+      "point2": "reflectors",
+      "point3": "indicator lights"
+    },
+
+{
+      "title": "interior",
+      "point1": "seat belts",
+      "point2": "Steering free play",
+      "point3": "licence plate light"
+    },
+
+{
+      "title": "braking system",
+      "point1": "parking brake",
+      "point2": "brake lines",
+      "point3": "wear brake pads"
+    },
+
+{
+      "title": "Lighting equipment",
+      "point1": "fog lights",
+      "point2": "reflectors",
+      "point3": "licence plate light"
+    },
+
+{
+      "title": "chassis & wheels",
+      "point1": "damper",
+      "point2": "wheel bearing",
+      "point3": "axle mounting"
+    },
+
+{
+      "title": "propulsion",
+      "point1": "oil loss?",
+      "point2": "exhaust system",
+      "point3": "driveshaft"
+    },
+
+{
+      "title": "emissions test",
+      "point1": "OBD-Check",
+      "point2": "P -> CO, Lambda",
+      "point3": "D -> opacity"
+    },
+
+{
+      "title": "electronic systems",
+      "point1": "ABS/ESP",
+      "point2": "airbag control light",
+      "point3": "error memory query"
     },
 	{
-      "title": "Beispiel4",
-      "point1": "Beispiel4",
-      "point2": "Beispiel4",
-      "point3": "Beispiel4"
+      "title": "Dokumentation",
+      "point1": "audit report",
+      "point2": "OM/GM -> HU-badge",
+      "point3": "EM -> ~ 1 Month"
     }
   ]
 }

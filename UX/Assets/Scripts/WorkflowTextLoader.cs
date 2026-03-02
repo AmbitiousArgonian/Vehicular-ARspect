@@ -59,7 +59,7 @@ public class WorkflowTextLoader : MonoBehaviour
 
         textField.text =
             $"<b>Workflowstep {printIndex} / {workflowList.workflow.Length}</b>\n\n" +
-            $"<b>{w.title}</b>\n\n" +
+            $"<b>{w.title}</b>\n" +
             $"• {w.point1}\n" +
             $"• {w.point2}\n" +
             $"• {w.point3}";
