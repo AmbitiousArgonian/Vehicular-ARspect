@@ -10,24 +10,23 @@ public class UIFader : MonoBehaviour
 
     public void FadeIn()
     {
-        gameObject.SetActive(true);
-        StartFade(1, false);
+        StartFade(1);
     }
 
     public void FadeOut()
     {
-        StartFade(0, true);
+        StartFade(0);
     }
 
-    void StartFade(float target, bool disableAfter)
+    void StartFade(float target)
     {
         if (currentFade != null)
             StopCoroutine(currentFade);
 
-        currentFade = StartCoroutine(FadeRoutine(target, disableAfter));
+        currentFade = StartCoroutine(FadeRoutine(target));
     }
 
-    IEnumerator FadeRoutine(float target, bool disableAfter)
+    IEnumerator FadeRoutine(float target)
     {
         float start = canvasGroup.alpha;
         float time = 0f;
@@ -43,7 +42,6 @@ public class UIFader : MonoBehaviour
         canvasGroup.interactable = target > 0.9f;
         canvasGroup.blocksRaycasts = target > 0.9f;
 
-        if (disableAfter && target == 0)
-            gameObject.SetActive(false);
+    
     }
 }

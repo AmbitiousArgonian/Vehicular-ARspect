@@ -27,7 +27,7 @@ public class UIController : MonoBehaviour
             ToggleVehiclePanel();
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.One)) // A
+        if ((currentMode == UIMode.Vehicle) && (OVRInput.GetDown(OVRInput.Button.One))) // A und Vehicle Panel geöffnet
         {
             rightLoader.NextVehicle();
         }
@@ -38,7 +38,7 @@ public class UIController : MonoBehaviour
              ToggleWorkflowPanel();;
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.Three)) // X
+        if ((currentMode == UIMode.Workflow) && (OVRInput.GetDown(OVRInput.Button.Three))) // X und Workflow Panel geöffnet
         {
             leftLoader.NextWorkflow();
         }
