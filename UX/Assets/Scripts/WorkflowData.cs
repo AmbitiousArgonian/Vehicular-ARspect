@@ -1,3 +1,13 @@
+using System.Collections.Generic;
+
+[System.Serializable]
+public class WorkflowImage
+{
+    public string path;
+    public string label;
+    public string timestamp;
+}
+
 [System.Serializable]
 public class WorkflowData
 {
@@ -5,6 +15,9 @@ public class WorkflowData
     public string point1;
     public string point2;
     public string point3;
+
+    // Neue Liste für Bilder
+    public List<WorkflowImage> images = new List<WorkflowImage>();
 }
 
 [System.Serializable]

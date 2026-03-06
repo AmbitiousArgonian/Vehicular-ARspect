@@ -24,6 +24,7 @@ public class TUVTemplatePro : MonoBehaviour
     [TextArea(10, 20)]
     public string docText;
 
+    [ContextMenu("Create TUV Template")]
     public void CreateTUVTemplate()
     {
         string clean = CleanTranscript(docText);
@@ -84,17 +85,32 @@ public class TUVTemplatePro : MonoBehaviour
     }
 
 page.AddWrappedText(bemerkungen, 50, y - 20, 500, 14);
-
-
         y -= 200;
 
         // FOTOS
-        page.AddText("Fotos", 50, y, 16);
+        float photoTitleY = 260;
+        page.AddText("Fotos", 50, photoTitleY, 16);
 
-        if (foto1 != null) page.AddImage(foto1, 50, y - 160, 150, 150);
-        if (foto2 != null) page.AddImage(foto2, 220, y - 160, 150, 150);
-        if (foto3 != null) page.AddImage(foto3, 390, y - 160, 150, 150);
+        // Workflow-Bilder laden
+        var workflowImages = LoadWorkflowImages();
+        Debug.Log("Workflow-Bilder geladen: " + workflowImages.Count);
 
+        float imgX = 50;
+        float imgY = 80;
+        float imgSize = 150;
+
+        foreach (var tex in workflowImages)
+        {
+            page.AddImage(tex, imgX, imgY, imgSize, imgSize);
+            imgX += 170;
+
+            // Neue Zeile nach 3 Bildern
+            if (imgX > 390)
+            {
+                imgX = 50;
+                imgY -= 170;
+            }
+        }
         // UNTERSCHRIFT
         page.AddText("Unterschrift Pruefer:", 50, 60, 14);
         page.AddText("__________________________", 200, 60, 14);
@@ -123,6 +139,43 @@ Debug.Log("PDF gespeichert unter: " + fullPath);
 UpdateReportIndex(filename, fullPath, timestamp);
 
     }
+
+
+
+// Lädt alle im Workflow gespeicherten Bilddateien (PNG-Pfade) und konvertiert sie in Texture2D, damit sie im PDF eingefügt werden können.
+private List<Texture2D> LoadWorkflowImages()
+{
+    List<Texture2D> textures = new List<Texture2D>();
+
+    if (WorkflowSession.Instance == null || WorkflowSession.Instance.data == null)
+        return textures;
+
+    if (WorkflowSession.Instance.data.images == null)
+        return textures;
+
+    foreach (var img in WorkflowSession.Instance.data.images)
+    {
+        try
+        {
+            if (img == null || string.IsNullOrWhiteSpace(img.path) || !File.Exists(img.path))
+                continue;
+
+            byte[] bytes = File.ReadAllBytes(img.path);
+
+            Texture2D tex = new Texture2D(2, 2);
+
+            if (tex.LoadImage(bytes))
+                textures.Add(tex);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning("Bild konnte nicht geladen werden: " + img.path);
+            Debug.LogWarning(e.Message);
+        }
+    }
+
+    return textures;
+}
 
     // -------------------------------------------------
     // INTELLIGENTER PARSER

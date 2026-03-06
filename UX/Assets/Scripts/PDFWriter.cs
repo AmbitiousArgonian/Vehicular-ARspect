@@ -24,9 +24,12 @@ public class PDFWriter
 
         content.Append("ET\n");
 
+        List<int> imageIds = new List<int>();
+
         foreach (var img in page.Images)
         {
             int imgId = WriteImage(img);
+            imageIds.Add(imgId);
 
             content.Append($"q\n{img.W} 0 0 {img.H} {img.X} {img.Y} cm\n/Im{imgId} Do\nQ\n");
         }
@@ -34,7 +37,21 @@ public class PDFWriter
         int contentId = WriteStream(content.ToString());
 
         body.Append($"{pageId} 0 obj\n");
-        body.Append("<< /Type /Page /Parent 0 0 R /Contents " + contentId + " 0 R >>\n");
+        body.Append("<< /Type /Page ");
+        body.Append("/Parent 0 0 R ");
+        body.Append($"/Contents {contentId} 0 R ");
+        body.Append("/Resources << ");
+
+        if (imageIds.Count > 0)
+        {
+            body.Append("/XObject << ");
+            foreach (var imgId in imageIds)
+                body.Append($"/Im{imgId} {imgId} 0 R ");
+            body.Append(">> ");
+        }
+
+        body.Append(">> ");
+        body.Append(">>\n");
         body.Append("endobj\n");
 
         return pageId;
@@ -44,13 +61,19 @@ public class PDFWriter
     {
         int id = NewObject();
 
+        // JPG-Binärdaten in Hex-Text umwandeln, damit sie sicher in den PDF-Stream geschrieben werden können
+        StringBuilder hexData = new StringBuilder(img.RawData.Length * 2 + 1);
+        foreach (byte b in img.RawData)
+            hexData.Append(b.ToString("X2"));
+        hexData.Append(">"); // Ende für ASCIIHexDecode
+
         body.Append($"{id} 0 obj\n");
         body.Append("<< /Type /XObject /Subtype /Image ");
         body.Append($"/Width {img.Width} /Height {img.Height} ");
         body.Append("/ColorSpace /DeviceRGB /BitsPerComponent 8 ");
-        body.Append($"/Filter /DCTDecode /Length {img.RawData.Length} >>\n");
+        body.Append($"/Filter [/ASCIIHexDecode /DCTDecode] /Length {hexData.Length} >>\n");
         body.Append("stream\n");
-        body.Append(Encoding.ASCII.GetString(img.RawData));
+        body.Append(hexData.ToString());
         body.Append("\nendstream\nendobj\n");
 
         return id;
