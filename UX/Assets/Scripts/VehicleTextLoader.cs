@@ -4,6 +4,22 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class VehicleTextLoader : MonoBehaviour
+/// Summary:
+/// Phrased und verarbeitet json mit Fahrzeug Informationen und bereitet aktuellen Index zur Ausgabe vor
+/// 
+/// - Lädt Vehicle-Daten aus Streaming assets mit Namen in Variable filename.
+/// - Parst die JSON-Daten in eine `VehicleList` (Array von `VehicleData`).
+/// - Zeigt einzelne Vehicle sequenziell in einem Textfeld an.
+/// - Ermöglicht das Navigieren zum nächsten Workflow-Schritt.
+///
+/// Inputs:
+/// - `textField`: Ein `TextMeshProUGUI`-Objekt, in dem der Workflow-Text angezeigt wird. Gibt Syntax in JSON vor
+/// - `fileName`: Der Name der JSON-Datei, die die Workflow-Daten enthält (In Demo: "VehicleInfo.json").
+///
+/// Outputs:
+/// - Aktualisiert das `textField` mit dem aktuellen Vehicle und Navigationsinformationen.
+/// - Debug-Meldungen bei Fehlern (z.B. Datei nicht gefunden, keine Daten).
+/// - Aktuell eingeblender Vehicleindex um Diktate einen Arbeitschritt zuzuordnen
 {
     public TextMeshProUGUI textField;
     public string fileName = "VehicleInfo.json";
@@ -82,31 +98,13 @@ public class VehicleTextLoader : MonoBehaviour
             $"Defects: {v.defReport}";
     }
 
+    public int GetCurrentVehhicleIndex()
+    { return currentVehicleIndex; }
+
 
     public void NextVehicle()
     {
         ShowVehicle(currentVehicleIndex + 1);
-    }
-
-    IEnumerator SwitchVehicle()
-    {
-        yield return FadeText(0);
-        int next = (currentVehicleIndex + 1) % vehicleList.vehicles.Length;
-        ShowVehicle(next);
-        yield return FadeText(1);
-    }
-
-    IEnumerator FadeText(float target)
-    {
-        float start = textGroup.alpha;
-        float time = 0f;
-
-        while (time < textFadeTime)
-        {
-            time += Time.deltaTime;
-            textGroup.alpha = Mathf.Lerp(start, target, time / textFadeTime);
-            yield return null;
-        }
     }
 
 }

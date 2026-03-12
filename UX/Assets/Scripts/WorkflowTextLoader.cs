@@ -4,6 +4,23 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class WorkflowTextLoader : MonoBehaviour
+
+/// Summary:
+/// Phrased und verarbeitet json mit Arbeitsablauf Informationen und bereitet aktuellen Index zur Ausgabe vor
+/// 
+/// - Lädt Workflow-Daten aus Streaming assets mit Namen in Variable filename.
+/// - Parst die JSON-Daten in eine `WorkflowList` (Array von `WorkflowData`).
+/// - Zeigt einzelne Workflow-Schritte sequenziell in einem Textfeld an.
+/// - Ermöglicht das Navigieren zum nächsten Workflow-Schritt.
+///
+/// Inputs:
+/// - `textField`: Ein `TextMeshProUGUI`-Objekt, in dem der Workflow-Text angezeigt wird. Gibt Syntax in JSON vor
+/// - `fileName`: Der Name der JSON-Datei, die die Workflow-Daten enthält (In Demo: "WorkflowInfo.json").
+///
+/// Outputs:
+/// - Aktualisiert das `textField` mit dem aktuellen Workflow-Schritt und Navigationsinformationen.
+/// - Debug-Meldungen bei Fehlern (z.B. Datei nicht gefunden, keine Daten).
+/// - Aktuell eingeblender Workflowindex um Diktate einen Arbeitschritt zuzuordnen
 {
     public TextMeshProUGUI textField;
     public string fileName = "WorkflowInfo.json";
@@ -49,6 +66,9 @@ public class WorkflowTextLoader : MonoBehaviour
 
         ShowStep(0);
     }
+
+    public int GetCurrentWorkflowIndex()
+        { return currentIndex; }
 
     public void ShowStep(int index)
     {
